@@ -1,0 +1,3 @@
+<Directory "/var/www/html/cloud_storage/includes">
+    Deny from all
+</Directory>
