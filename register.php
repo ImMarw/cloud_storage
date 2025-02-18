@@ -25,11 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h2>Registrace</h2>
         <form method="POST">
-            <input type="text" name="username" placeholder="Uživatelské jméno" required><br>
-            <input type="email" name="email" placeholder="Email" required><br>
-            <input type="password" name="password" placeholder="Heslo" required><br>
-            <button type="submit">Registrovat</button>
+            <input type="text" name="username" placeholder="Uživatelské jméno" required class="full-width"><br>
+            <input type="email" name="email" placeholder="Email" required class="full-width"><br>
+            <input type="password" name="password" placeholder="Heslo" required class="full-width"><br>
+            <button type="submit" class="full-width">Registrovat</button>
         </form>
+        <div class="center-button">
+            <a href="login.php" class="button full-width">Již máte účet? Přihlásit se</a>
+        </div>
     </div>
 </body>
 </html>

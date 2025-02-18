@@ -9,16 +9,16 @@ if (isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloudové Úložiště</title>
+    <title>Cloudové úložiště</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="centered-page"> <!-- Pouze index.php má tuto třídu -->
     <div class="container">
         <h1>Vítejte v Cloudovém Úložišti</h1>
-        <a href="login.php" class="button">Přihlásit se</a>
-        <a href="register.php" class="button">Registrovat</a>
+        <div class="button-container">
+            <a href="login.php" class="button">Přihlásit se</a>
+            <a href="register.php" class="button">Registrovat</a>
+        </div>
     </div>
 </body>
 </html>

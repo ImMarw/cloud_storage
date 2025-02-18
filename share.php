@@ -41,6 +41,7 @@ $files = $files_stmt->fetchAll();
 </head>
 <body>
     <div class="container">
+        <a href="dashboard.php" class="top-right">🔙 Zpět na Dashboard</a>
         <h2>Sdílení souboru</h2>
         <form method="POST">
             <select name="file_id" required>
@@ -50,9 +51,8 @@ $files = $files_stmt->fetchAll();
                 <?php endforeach; ?>
             </select>
             <input type="email" name="receiver_email" placeholder="Email uživatele" required><br>
-            <button type="submit">Sdílet</button>
+            <button type="submit">📎 Sdílet</button>
         </form>
-        <a href="dashboard.php" class="button">Zpět na Dashboard</a>
     </div>
 </body>
 </html>

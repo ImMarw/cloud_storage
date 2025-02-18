@@ -33,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
 </head>
 <body>
     <div class="container">
+        <a href="dashboard.php" class="top-right">🔙 Zpět na Dashboard</a>
         <h2>Nahrání souboru</h2>
         <form action="upload.php" method="post" enctype="multipart/form-data">
             <input type="file" name="file" required><br>
-            <button type="submit">Nahrát</button>
+            <button type="submit">📤 Nahrát</button>
         </form>
-        <a href="dashboard.php" class="button">Zpět na Dashboard</a>
     </div>
 </body>
 </html>

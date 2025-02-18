@@ -25,29 +25,26 @@ $shared_files = $stmt->fetchAll();
 </head>
 <body>
     <div class="container">
+        <a href="dashboard.php" class="top-right">🔙 Zpět na Dashboard</a>
         <h1>Sdílené soubory</h1>
-        <a href="dashboard.php" class="button">Zpět na Dashboard</a>
 
         <ul>
             <?php if (empty($shared_files)): ?>
                 <li>Žádné sdílené soubory</li>
             <?php else: ?>
                 <?php foreach ($shared_files as $file) : ?>
-                    <li>
-                        <strong><?= htmlspecialchars($file['filename']); ?></strong> 
-                        (sdíleno od: <?= htmlspecialchars($file['sender']); ?>)
+                    <li class="file-container">
+                        <span><?= htmlspecialchars($file['filename']); ?> (sdíleno od: <?= htmlspecialchars($file['sender']); ?>)</span>
                         <a href="<?= htmlspecialchars($file['filepath']); ?>" target="_blank">Otevřít</a>
+                        <?php
+                        $fileType = mime_content_type($file['filepath']);
+                        if (strpos($fileType, 'image') !== false): ?>
+                            <img src="<?= htmlspecialchars($file['filepath']); ?>" alt="Náhled" class="thumbnail">
+                        <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
-            <?php endif; ?>
-            <?php
-                $fileType = mime_content_type($file['filepath']);
-                if (strpos($fileType, 'image') !== false): ?>
-                <br>
-                <img src="<?= htmlspecialchars($file['filepath']); ?>" alt="Náhled" class="thumbnail">
             <?php endif; ?>
         </ul>
     </div>
 </body>
 </html>
-<a href="shared_files.php" class="button">Sdílené soubory</a>
