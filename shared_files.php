@@ -27,24 +27,67 @@ $shared_files = $stmt->fetchAll();
     <div class="container">
         <a href="dashboard.php" class="top-right">🔙 Zpět na Dashboard</a>
         <h1>Sdílené soubory</h1>
-
-        <ul>
-            <?php if (empty($shared_files)): ?>
-                <li>Žádné sdílené soubory</li>
-            <?php else: ?>
-                <?php foreach ($shared_files as $file) : ?>
-                    <li class="file-container">
-                        <span><?= htmlspecialchars($file['filename']); ?> (sdíleno od: <?= htmlspecialchars($file['sender']); ?>)</span>
+        <div class="file-grid">
+        <?php foreach ($shared_files as $file) : ?>
+            <div class="file-item">
+                <div class="menu-container">
+                    <button class="menu-button">⋮</button>
+                    <div class="menu-dropdown">
                         <a href="<?= htmlspecialchars($file['filepath']); ?>" target="_blank">Otevřít</a>
-                        <?php
-                        $fileType = mime_content_type($file['filepath']);
-                        if (strpos($fileType, 'image') !== false): ?>
-                            <img src="<?= htmlspecialchars($file['filepath']); ?>" alt="Náhled" class="thumbnail">
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </ul>
+                        <a href="<?= htmlspecialchars($file['filepath']); ?>" download>Stáhnout</a>
+                        <button class="rename-file" data-file="<?= $file['id']; ?>">Přejmenovat</button>
+                        <form action="delete_file.php" method="POST">
+                            <input type="hidden" name="file_id" value="<?= $file['id']; ?>">
+                            <button type="submit" class="delete-button">Smazat</button>
+                        </form>
+                    </div>
+                </div>
+
+                <?php
+                $fileExt = pathinfo($file['filename'], PATHINFO_EXTENSION);
+                $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+                if (in_array(strtolower($fileExt), $imageExtensions)) {
+                    echo '<img src="' . htmlspecialchars($file['filepath']) . '" class="file-preview">';
+                } else {
+                    echo '<div class="file-icon"><i class="fas fa-file-alt"></i></div>';
+                }
+                ?>
+                <span class="file-name" title="<?= htmlspecialchars($file['filename']); ?>">
+                    <?= htmlspecialchars(mb_strimwidth($file['filename'], 0, 20, "...")); ?>
+                </span>
+            </div>
+        <?php endforeach; ?>
     </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Otevření/uzavření menu po kliknutí na tečky
+    document.querySelectorAll(".menu-button").forEach(button => {
+        button.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Skryjeme všechna otevřená menu
+            document.querySelectorAll(".menu-dropdown").forEach(menu => menu.style.display = "none");
+
+            // Zobrazíme menu vedle aktuálního souboru
+            let menu = this.nextElementSibling;
+            menu.style.display = "block";
+
+            // Dynamické umístění menu vedle file-item
+            let rect = this.getBoundingClientRect();
+            menu.style.top = `${rect.top}px`;
+            menu.style.left = `${rect.right + 5}px`;
+        });
+    });
+
+    // Zavře menu po kliknutí kamkoliv jinam
+    document.addEventListener("click", function () {
+        document.querySelectorAll(".menu-dropdown").forEach(menu => {
+            menu.style.display = "none";
+            });
+        });
+    });
+    </script>
 </body>
 </html>

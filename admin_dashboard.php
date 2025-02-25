@@ -28,17 +28,19 @@ $files = $stmt->fetchAll();
         
         <h2>Všechny nahrané soubory</h2>
         <ul>
-            <?php foreach ($files as $file) : ?>
-                <li class="file-container">
-                    <span><?= htmlspecialchars($file['filename']); ?> (uživatel: <?= htmlspecialchars($file['username']); ?>)</span>
-                    <a href="<?= htmlspecialchars($file['filepath']); ?>" target="_blank">Otevřít</a>
+        <?php foreach ($files as $file) : ?>
+            <li class="file-container">
+                <span><?= htmlspecialchars($file['filename']); ?> (uživatel: <?= htmlspecialchars($file['username']); ?>)</span>
+                <div class="button-group">
+                    <a href="<?= htmlspecialchars($file['filepath']); ?>" target="_blank" class="open-button">Otevřít</a>
                     <form action="delete_file.php" method="POST" style="display:inline;">
                         <input type="hidden" name="file_id" value="<?= $file['id']; ?>">
-                        <button type="submit" style="background: red; color: white;">Smazat</button>
+                        <button type="submit" class="delete-button">Smazat</button>
                     </form>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
     </div>
 </body>
 </html>
