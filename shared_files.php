@@ -62,7 +62,6 @@ $shared_files = $stmt->fetchAll();
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function () {
-    // Otevření/uzavření menu po kliknutí na tečky
     document.querySelectorAll(".menu-button").forEach(button => {
         button.addEventListener("click", function (e) {
             e.stopPropagation();
@@ -74,10 +73,9 @@ $shared_files = $stmt->fetchAll();
             let menu = this.nextElementSibling;
             menu.style.display = "block";
 
-            // Dynamické umístění menu vedle file-item
-            let rect = this.getBoundingClientRect();
-            menu.style.top = `${rect.top}px`;
-            menu.style.left = `${rect.right + 5}px`;
+            // Dynamické umístění menu vedle file-itemu
+            let parentItem = this.closest(".file-item");
+            let rect = parentItem.getBoundingClientRect();
         });
     });
 

@@ -234,16 +234,18 @@ a:hover {
 }
 /* Grid layout jako Google Disk */
 
-/* Karta souboru */
+/* Grid layout jako Google Disk */
 .file-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
     padding: 20px;
+    z-index: 1;
 }
 
-/* Karta souboru */
+/* File-item jako Google Disk */
 .file-item {
+    position: relative;
     background: #181a20;
     border-radius: 10px;
     padding: 8px;
@@ -260,67 +262,9 @@ a:hover {
 .file-item:hover {
     transform: scale(1.05);
     background: #22242d;
-}
-/* Náhled souboru */
-.file-preview {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 5px;
+    z-index: 2;
 }
 
-/* Název souboru */
-.file-name {
-    font-size: 14px;
-    color: #ddd;
-    margin-top: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 90%;
-}
-
-/* Ikona pro neobrázkové soubory */
-.file-icon {
-    font-size: 50px;
-    color: white;
-    margin-bottom: 10px;
-}
-
-
-/* Akce (otevřít, smazat) */
-.file-actions {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.open-button {
-    background-color: dodgerblue;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-}
-
-.open-button:hover {
-    background-color: #0056b3;
-}
-
-.delete-button {
-    background-color: red;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.delete-button:hover {
-    background-color: darkred;
-}
 /* Umístění tří teček (menu button) vpravo nahoře */
 .menu-container {
     position: absolute;
@@ -328,7 +272,7 @@ a:hover {
     right: 5px;
 }
 
-/* Menu button */
+/* Tlačítko menu */
 .menu-button {
     background: none;
     border: none;
@@ -342,19 +286,33 @@ a:hover {
     color: #ccc;
 }
 
-/* Dropdown menu vedle file-item */
+/* Náhled souboru */
+.file-preview {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Název souboru – pokud je dlouhý, zobrazí se jen část s '...' */
+.file-name {
+    font-size: 14px;
+    color: #ddd;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
 .menu-dropdown {
     display: none;
     position: absolute;
-    top: 0;
-    left: 100%; /* Posune menu přímo vedle file-item */
     background: #22242d;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
     width: 160px;
-    z-index: 10;
-    transform: translateX(1px); /* Lehce oddálí od souboru */
+    z-index: 2;
 }
 
 /* Obsah menu */
